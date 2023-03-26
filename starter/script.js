@@ -12,6 +12,21 @@ const inputCadence = document.querySelector('.form__input--cadence');
 const inputElevation = document.querySelector('.form__input--elevation');
 
 let map, mapEvent;
+
+class App {
+  constructor() {}
+
+  _getPosition() {}
+
+  _loadMap() {}
+
+  _showForm() {}
+
+  _toggleElevationField() {}
+
+  _newWorkout() {}
+}
+
 if (navigator.geolocation)
   navigator.geolocation.getCurrentPosition(
     function (position) {
@@ -25,7 +40,7 @@ if (navigator.geolocation)
       //Handling clicks on map
       map = L.map('map').setView(coords, 13);
 
-      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
         attribution:
           '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       }).addTo(map);
@@ -46,13 +61,14 @@ form.addEventListener('submit', function (e) {
   e.preventDefault();
 
   //Clear input field
-  inputElevation =
-    inputDistance.value =
+  inputDistance.value =
     inputDuration.value =
     inputCadence.value =
+    inputElevation.value =
       '';
 
   //Display marker
+  console.log(mapEvent);
   const { lat, lng } = mapEvent.latlng;
   L.marker([lat, lng])
     .addTo(map)
